@@ -2,7 +2,7 @@ const express = require('express');
 const itemsController = require('./items_controller.js');
 const router = express.Router();
 
-router.get('/', itemsController.getAllItems);
-router.get('/:id', itemsController.getItemById);
+router.route('/').get(itemsController.getAllItems).post();
+router.route('/:id').get(itemsController.getItemById);
 
 module.exports = router;
