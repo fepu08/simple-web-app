@@ -6,6 +6,9 @@ router
   .route('/')
   .get(itemsController.getAllItems)
   .post(itemsController.addItem);
-router.route('/:id').get(itemsController.getItemById);
+router
+  .route('/:id')
+  .get(itemsController.getItemById)
+  .delete(itemsController.deleteItem);
 
 module.exports = router;

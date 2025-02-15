@@ -22,7 +22,7 @@ function getItemById(req, res) {
 }
 
 function addItem(req, res) {
-  console.log('Add new item...');
+  console.log('Adding new item...');
   const item = req.body;
   // TODO: add validation
   item.id = uuidv4();
@@ -31,4 +31,16 @@ function addItem(req, res) {
   res.send(200);
 }
 
-module.exports = { getAllItems, getItemById, addItem };
+function deleteItem(req, res) {
+  console.log(`Deleting item by ID: ${req.params.id}`);
+  const index = items.findIndex((item) => item.id === req.params.id);
+  if (index === -1) {
+    res.status(404).json({ msg: 'No item found with the provided ID' });
+    return;
+  }
+
+  items.splice(index, 1);
+  res.status(204).send();
+}
+
+module.exports = { getAllItems, getItemById, addItem, deleteItem };
