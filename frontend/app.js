@@ -32,22 +32,30 @@ function renderItems(container, items) {
     return;
   }
 
-  const itemsList = document.createElement('ul');
-  items.forEach((item) => {
-    const outerListItem = document.createElement('li');
-    const innerList = document.createElement('ul');
+  const itemContainer = document.getElementById('items-container');
+  let itemsPerRow = 3;
+  for (let i = 0; i < items.length; i += itemsPerRow) {
+    const rowDiv = document.createElement('div');
+    rowDiv.classList.add('items-row');
 
-    Object.entries(item).forEach(([key, value]) => {
-      const innerListItem = document.createElement('li');
-      innerListItem.innerText = `${key} - ${value}`;
-      innerList.appendChild(innerListItem);
-    });
+    for (let j = i; j < i + itemsPerRow && j < items.length; j++) {
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('item');
+      itemDiv.innerHTML = `
+			<div class="item-header">
+				<h2 class="item-name">${items[j].name}</h2>
+				<h2 class="item-price">$${items[j].price}</h2>
+			</div>
+			<p class="item-description">
+			${items[j].description}
+			</p>
+			<p class="category">#${items[j].category.toLowerCase()}</p>
+		`;
+      rowDiv.appendChild(itemDiv);
+    }
 
-    outerListItem.appendChild(innerList);
-    itemsList.appendChild(outerListItem);
-  });
-
-  container.appendChild(itemsList);
+    itemContainer.appendChild(rowDiv);
+  }
 }
 
 (async function () {
