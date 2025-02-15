@@ -3,12 +3,17 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  async getItems() {
-    const res = await fetch(this.baseUrl + '/items');
-    if (!res.ok) {
-      console.error('Something went wrong...');
+  async get(endpoint) {
+    try {
+      const res = await fetch(`${this.baseUrl}${endpoint}`);
+      if (!res.ok) {
+        throw new Error(`Error fetching ${endpoint}: ${res.statusText}`);
+      }
+      return await res.json();
+    } catch (error) {
+      console.error(error);
+      return null;
     }
-    return res.json();
   }
 }
 
@@ -21,31 +26,35 @@ function createTextFromItemObj(item) {
   return parts.join(', ');
 }
 
-(async function () {
-  const apiBaseUrl = 'http://localhost:3000';
-  const itemsContainer = document.getElementById('items-container');
-  const apiClient = new ApiClient(apiBaseUrl);
-  const items = await apiClient.getItems();
-
-  if (!items || items.length < 1) {
-    const error = document.createElement('h2');
-    error.innerText = 'No items to show';
-    itemsContainer.appendChild(error);
+function renderItems(container, items) {
+  if (!items || items.length === 0) {
+    container.innerHTML = `<h2>No items to show</h2>`;
+    return;
   }
 
   const itemsList = document.createElement('ul');
-  for (let i = 0; i < items.length; i++) {
+  items.forEach((item) => {
     const outerListItem = document.createElement('li');
     const innerList = document.createElement('ul');
-    outerListItem.appendChild(innerList);
 
-    Object.entries(items[i]).forEach(([key, value]) => {
+    Object.entries(item).forEach(([key, value]) => {
       const innerListItem = document.createElement('li');
       innerListItem.innerText = `${key} - ${value}`;
       innerList.appendChild(innerListItem);
     });
 
+    outerListItem.appendChild(innerList);
     itemsList.appendChild(outerListItem);
-  }
-  itemsContainer.appendChild(itemsList);
+  });
+
+  container.appendChild(itemsList);
+}
+
+(async function () {
+  const apiBaseUrl = 'http://localhost:3000';
+  const itemsContainer = document.getElementById('items-container');
+  const apiClient = new ApiClient(apiBaseUrl);
+
+  const items = await apiClient.get('/items');
+  renderItems(itemsContainer, items);
 })();
