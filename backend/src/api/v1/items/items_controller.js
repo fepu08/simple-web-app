@@ -43,4 +43,23 @@ function deleteItem(req, res) {
   res.status(204).send();
 }
 
-module.exports = { getAllItems, getItemById, addItem, deleteItem };
+function updateItem(req, res) {
+  console.log(`Updating item with ID: ${req.params.id}`);
+  const index = items.findIndex((item) => item.id === req.params.id);
+  if (index === -1) {
+    res.status(404).json({ msg: 'No item found with the provided ID' });
+    return;
+  }
+  const oldItem = items[index];
+  items[index] = {
+    id: oldItem.id,
+    name: req.body.name || oldItem.name,
+    price: req.body.price || oldItem.price,
+    description: req.body.description || oldItem.description,
+    category: req.body.category || oldItem.category,
+    imageUrl: req.body.imageUrl || oldItem.imageUrl,
+  };
+  res.status(200).send();
+}
+
+module.exports = { getAllItems, getItemById, addItem, deleteItem, updateItem };
