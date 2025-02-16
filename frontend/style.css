@@ -12,19 +12,15 @@ body {
 }
 
 #items-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers rows horizontally */
-  gap: 25px;
-  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .items-row {
   display: flex;
-  justify-content: center; /* Centers items inside the row */
+  flex-wrap: wrap;
   gap: 30px; /* Space between items */
-  width: 100%;
-  max-width: 1600px;
+  justify-content: space-between;
 }
 
 .item {
@@ -44,4 +40,10 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 1303px) {
+  .item {
+    margin: 0 auto;
+  }
 }

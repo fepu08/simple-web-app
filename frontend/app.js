@@ -33,29 +33,25 @@ function renderItems(container, items) {
   }
 
   const itemContainer = document.getElementById('items-container');
-  let itemsPerRow = 3;
-  for (let i = 0; i < items.length; i += itemsPerRow) {
-    const rowDiv = document.createElement('div');
-    rowDiv.classList.add('items-row');
-
-    for (let j = i; j < i + itemsPerRow && j < items.length; j++) {
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('item');
-      itemDiv.innerHTML = `
+  const itemRow = document.createElement('div');
+  itemRow.classList.add('items-row');
+  for (let i = 0; i < items.length; i++) {
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('item');
+    itemDiv.innerHTML = `
 			<div class="item-header">
-				<h2 class="item-name">${items[j].name}</h2>
-				<h2 class="item-price">$${items[j].price}</h2>
+				<h2 class="item-name">${items[i].name}</h2>
+				<h2 class="item-price">$${items[i].price}</h2>
 			</div>
 			<p class="item-description">
-			${items[j].description}
+			${items[i].description}
 			</p>
-			<p class="category">#${items[j].category.toLowerCase()}</p>
+			<p class="category">#${items[i].category.toLowerCase()}</p>
 		`;
-      rowDiv.appendChild(itemDiv);
-    }
-
-    itemContainer.appendChild(rowDiv);
+    itemRow.appendChild(itemDiv);
   }
+  itemContainer.appendChild(itemRow);
+  container.appendChild(itemContainer);
 }
 
 (async function () {
