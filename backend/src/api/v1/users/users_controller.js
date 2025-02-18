@@ -1,4 +1,4 @@
-const { setUpJwtCookie } = require('../../../utils/jwt_utils');
+const { setUpJwtCookie, removeJWTCookie } = require('../../../utils/jwt_utils');
 const hashingUtils = require('../../../utils/hashing_utils');
 
 const users = [];
@@ -41,6 +41,7 @@ async function loginUser(req, res) {
 
 function logoutUser(req, res) {
   console.log('Logout user...');
+  removeJWTCookie(res);
   res.status(200).send();
 }
 
