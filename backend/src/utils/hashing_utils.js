@@ -6,8 +6,8 @@ async function createHash(strToHash) {
   return await bcrypt.hash(strToHash, salt);
 }
 
-function compareWithHashed(str, hashedStr) {
-  return bcrypt.compare(str, hashedStr);
+async function compareWithHashed(str, hashedStr) {
+  return await bcrypt.compare(str, hashedStr);
 }
 
 module.exports = {
