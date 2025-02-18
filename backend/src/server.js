@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const itemsRouter = require('./api/v1/items/items_router');
+const usersRouter = require('./api/v1/users/users_router');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/items', itemsRouter);
+app.use('/users', usersRouter);
 
 app.listen(PORT, () => {
   console.log(`App is listening on port: ${PORT}`);
