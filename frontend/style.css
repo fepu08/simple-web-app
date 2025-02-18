@@ -11,6 +11,38 @@ body {
   color: #e6e6e6;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+}
+
+.brand {
+}
+
+.nav-item {
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #e6e6e6;
+  border: 3px solid #e6e6e6;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.nav-item a:hover {
+  background-color: #e6e6e6;
+  color: #555;
+  border: 3px solid #555;
+}
+
+.login-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
 #items-container {
   max-width: 80%;
   margin: 0 auto;
@@ -47,3 +79,76 @@ body {
     margin: 0 auto;
   }
 }
+
+/*    REGISTER PAGE    */
+.container {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form-container {
+  width: 50%;
+  padding: 40px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px #e6e6e6 solid;
+  border-radius: 100px;
+  color: #e6e6e6;
+  padding: 12px;
+  width: 100%;
+  text-indent: 18px;
+  font-size: 18px;
+}
+
+.input-group label {
+  color: #e6e6e6;
+  background-color: #555;
+  font-size: 11px;
+  position: absolute;
+  left: 25px;
+  top: -7px;
+  padding: 0 2px;
+}
+
+#registration_submit_btn {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 10px 30px;
+  width: 100%;
+  border-radius: 100px;
+  font-size: 16px;
+}
+
+#registration_submit_btn:hover {
+  background-color: #555;
+  color: #e6e6e6;
+  border: 2px #e6e6e6 solid;
+  border-radius: 100px;
+  padding: 10px 30px;
+  width: 100%;
+  border-radius: 100px;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* ------------------- */
