@@ -23,6 +23,11 @@ nav {
 .nav-item {
 }
 
+.brand a {
+  text-decoration: none;
+  color: #e6e6e6;
+}
+
 .nav-item a {
   text-decoration: none;
   color: #e6e6e6;
@@ -99,7 +104,7 @@ nav {
   align-items: center;
 }
 
-.register-form {
+#register-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -131,7 +136,7 @@ nav {
   padding: 0 2px;
 }
 
-#registration_submit_btn {
+#registration_btn {
   background-color: #e6e6e6;
   border: none;
   padding: 10px 30px;
@@ -140,7 +145,7 @@ nav {
   font-size: 16px;
 }
 
-#registration_submit_btn:hover {
+#registration_btn:hover {
   background-color: #555;
   color: #e6e6e6;
   border: 2px #e6e6e6 solid;
