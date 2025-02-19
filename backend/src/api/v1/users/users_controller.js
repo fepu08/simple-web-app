@@ -26,17 +26,21 @@ async function registerUser(req, res) {
   res.status(200).json(newUser);
 }
 
-async function loginUser(req, res) {
+async function loginUser(req, res, next) {
   console.log('Login user...');
-  const { email, password } = req.body;
-  const user = await getUser(email, password);
-  if (!user) {
-    res.status(400).json({ msg: 'Invalid credentials' });
-    return;
-  }
+  try {
+    const { email, password } = req.body;
+    const user = await getUser(email, password);
+    if (!user) {
+      res.status(400).json({ msg: 'Invalid credentials' });
+      return;
+    }
 
-  setUpJwtCookie(user.id, res);
-  res.status(200).json(user);
+    setUpJwtCookie(user.id, res);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
 }
 
 function logoutUser(req, res) {
@@ -68,7 +72,7 @@ function getNextId() {
 }
 
 async function getUser(email, password) {
-  if (users.length < 1) return false; // TODO: make some error handling
+  if (users.length < 1) throw new Error('User not found');
   if (!email || !password) return false;
 
   const user = users.find(
